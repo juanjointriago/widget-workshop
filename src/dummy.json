@@ -1,0 +1,27 @@
+{
+    "users": [
+      { "id": "1", "email": "superadmin@test.com", "profile": "super-admin" },
+      { "id": "2", "email": "propietario@test.com", "profile": "propietario", "workshopId": "W1" },
+      { "id": "3", "email": "profesional@test.com", "profile": "profesional", "workshopId": "W1" },
+      { "id": "4", "email": "contabilidad@test.com", "profile": "contabilidad", "workshopId": "W1" },
+      { "id": "5", "email": "cliente@test.com", "profile": "cliente", "workshopId": "W1" }
+    ],
+    "workshops": [
+      { "id": "W1", "name": "Taller de Prueba", "ownerId": "2" }
+    ],
+    "products": [
+        { "id": "P1", "name": "Filtro de Aceite", "price": 20, "stock": 50, "type": "repuesto", "workshopId": "W1" }
+    ],
+    "services": [
+        { "id": "S1", "name": "Mantenimiento de Motor", "price": 80, "suggestedTime": 4, "workshopId": "W1" }
+    ],
+    "clients": [
+        { "id": "C1", "email": "cliente@test.com", "ruc": "1234567890", "workshopId": "W1" }
+    ],
+    "vehicles": [
+        { "id": "V1", "brand": "Toyota", "model": "Corolla", "plate": "XYZ-123", "clientId": "C1" }
+    ],
+    "serviceOrders": [
+        { "id": "SO1", "vehicleId": "V1", "mechanicId": "3", "status": "iniciado", "workshopId": "W1" }
+    ]
+  }

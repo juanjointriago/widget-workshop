@@ -1,15 +1,19 @@
 import { Workshop } from '../types/workshop';
+import { db } from '../firebase-config';
+import { collection, addDoc } from 'firebase/firestore';
+import { isDevelopment } from '../config';
 
 class WorkshopService {
-  // Simulación de creación de un taller
   async createWorkshop(workshopData: Omit<Workshop, 'id'>): Promise<Workshop> {
-    const newWorkshop: Workshop = {
-      id: Date.now().toString(),
-      ...workshopData,
-    };
-    // En una app real, esto se guardaría en la base de datos
-    console.log('Taller creado:', newWorkshop);
-    return Promise.resolve(newWorkshop);
+    if (isDevelopment) {
+      console.log('--- DEVELOPMENT MODE: Faking workshop creation ---');
+      const newWorkshop = { id: `W${Date.now()}`, ...workshopData };
+      console.log('Taller creado (simulado):', newWorkshop);
+      return newWorkshop;
+    }
+
+    const docRef = await addDoc(collection(db, 'workshops'), workshopData);
+    return { id: docRef.id, ...workshopData };
   }
 }
 

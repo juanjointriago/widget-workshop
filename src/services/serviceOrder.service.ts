@@ -1,22 +1,27 @@
 import { ServiceOrder, ServiceStatus } from '../types/serviceOrder';
+import { db } from '../firebase-config';
+import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { isDevelopment } from '../config';
 
 class ServiceOrderService {
-  // Simulación de la creación de una orden de servicio
   async createServiceOrder(order: Omit<ServiceOrder, 'id' | 'status'>): Promise<ServiceOrder> {
-    const newOrder: ServiceOrder = {
-      id: Date.now().toString(),
-      status: 'iniciado',
-      ...order,
-    };
-    console.log('Orden de servicio creada:', newOrder);
-    return newOrder;
+    if (isDevelopment) {
+      console.log('--- DEV MODE: Faking service order creation ---');
+      const newOrder = { id: `SO${Date.now()}`, status: 'iniciado', ...order } as ServiceOrder;
+      return newOrder;
+    }
+    const newOrderData = { ...order, status: 'iniciado' };
+    const docRef = await addDoc(collection(db, 'serviceOrders'), newOrderData);
+    return { id: docRef.id, ...newOrderData } as ServiceOrder;
   }
 
-  // Simulación de la actualización del estado
-  async updateStatus(orderId: string, status: ServiceStatus): Promise<ServiceOrder> {
-    console.log(`Orden ${orderId} actualizada a ${status}`);
-    // Aquí iría la lógica para encontrar y actualizar la orden
-    return {} as ServiceOrder; // Retorno simulado
+  async updateStatus(orderId: string, status: ServiceStatus): Promise<void> {
+    if (isDevelopment) {
+      console.log(`--- DEV MODE: Faking status update for order ${orderId} to ${status} ---`);
+      return;
+    }
+    const orderRef = doc(db, 'serviceOrders', orderId);
+    await updateDoc(orderRef, { status });
   }
 }
 

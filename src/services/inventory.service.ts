@@ -1,17 +1,29 @@
 import { Product, Service } from '../types/inventory';
+import { db } from '../firebase-config';
+import { collection, addDoc } from 'firebase/firestore';
+import { isDevelopment } from '../config';
 
 class InventoryService {
-  // Simulación de gestión de inventario
   async addProduct(product: Omit<Product, 'id'>): Promise<Product> {
-    const newProduct: Product = { id: Date.now().toString(), ...product };
-    console.log('Producto añadido:', newProduct);
-    return newProduct;
+    if (isDevelopment) {
+      console.log('--- DEV MODE: Faking product add ---');
+      const newProduct = { id: `P${Date.now()}`, ...product };
+      console.log('Producto añadido (simulado):', newProduct);
+      return newProduct;
+    }
+    const docRef = await addDoc(collection(db, 'products'), product);
+    return { id: docRef.id, ...product };
   }
 
   async addService(service: Omit<Service, 'id'>): Promise<Service> {
-    const newService: Service = { id: Date.now().toString(), ...service };
-    console.log('Servicio añadido:', newService);
-    return newService;
+    if (isDevelopment) {
+        console.log('--- DEV MODE: Faking service add ---');
+        const newService = { id: `S${Date.now()}`, ...service };
+        console.log('Servicio añadido (simulado):', newService);
+        return newService;
+      }
+      const docRef = await addDoc(collection(db, 'services'), service);
+      return { id: docRef.id, ...service };
   }
 }
 
