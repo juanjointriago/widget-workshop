@@ -1,7 +1,7 @@
-import { ServiceOrder, ServiceStatus } from '../types/serviceOrder';
-import { db } from '../firebase-config';
+import type { ServiceOrder, ServiceStatus } from '../types/serviceOrder';
 import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { isDevelopment } from '../config';
+import { db } from '../firebase-config';
 
 class ServiceOrderService {
   async createServiceOrder(order: Omit<ServiceOrder, 'id' | 'status'>): Promise<ServiceOrder> {

@@ -1,7 +1,7 @@
-import { Product, Service } from '../types/inventory';
-import { db } from '../firebase-config';
+import type { Product, Service } from '../types/inventory';
 import { collection, addDoc } from 'firebase/firestore';
 import { isDevelopment } from '../config';
+import { db } from '../firebase-config';
 
 class InventoryService {
   async addProduct(product: Omit<Product, 'id'>): Promise<Product> {
