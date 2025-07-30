@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Typography, Box, Card, CardContent, Stepper, Step, StepLabel } from '@mui/material';
-import { ServiceOrder, ServiceStatus } from '../../types/serviceOrder';
+import type { ServiceOrder, ServiceStatus } from '../../types/serviceOrder';
 
 // Datos simulados
 const clientOrder: ServiceOrder = {

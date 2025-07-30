@@ -1,7 +1,7 @@
+import type { Workshop } from '../types/workshop';
+import { db } from '../firebase-config';
 import { collection, addDoc } from 'firebase/firestore';
 import { isDevelopment } from '../config';
-import { db } from '../firebase-config';
-import type { Workshop } from '../types/workshop';
 
 class WorkshopService {
   async createWorkshop(workshopData: Omit<Workshop, 'id'>): Promise<Workshop> {

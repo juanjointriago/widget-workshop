@@ -7,7 +7,7 @@ import MechanicDashboard from './pages/profesional/MechanicDashboard';
 import VehicleStatusPage from './pages/cliente/VehicleStatusPage';
 import BillingPage from './pages/propietario/BillingPage';
 import ReportsPage from './pages/propietario/ReportsPage';
-import { UserProfile } from './types/user';
+import type { UserProfile } from './types/user';
 
 function App() {
   const { isAuthenticated, user, login, logout } = useAuthStore();

@@ -1,7 +1,7 @@
 import type { Client, Vehicle } from '../types/client';
+import { db } from '../firebase-config';
 import { collection, addDoc } from 'firebase/firestore';
 import { isDevelopment } from '../config';
-import { db } from '../firebase-config';
 
 class ClientService {
   async registerClient(client: Omit<Client, 'id'>): Promise<Client> {

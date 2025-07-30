@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Typography, Box, Card, CardContent, CardActions } from '@mui/material';
+import { Button, Container, Typography, Box, Card, CardContent, CardActions } from '@mui/materia';
 import { serviceOrderService } from '../../services/serviceOrder.service';
-import { ServiceOrder } from '../../types/serviceOrder';
+import type { ServiceOrder } from '../../types/serviceOrder';
 
 // Datos simulados de órdenes asignadas
 const assignedOrders: ServiceOrder[] = [

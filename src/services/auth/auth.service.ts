@@ -1,9 +1,9 @@
+import type { User } from '../../types/user';
+import { auth, db } from '../../firebase-config';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { isDevelopment } from '../../config';
 import dummyData from '../../dummy.json';
-import type { User } from '../../types/user';
-import { auth, db } from '../../firebase-config';
 
 class AuthService {
   async login(email: string, pass: string): Promise<User> {
